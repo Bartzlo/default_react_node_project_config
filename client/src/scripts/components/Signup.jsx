@@ -12,6 +12,28 @@ class Signup extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleError = this.handleError.bind(this)
+  }
+
+  handleError (resMessage) {
+    if (resMessage.text === 'required field is not filled') {
+      this.setState({ error: 'Required field is not filled' })
+      return
+    }
+
+    if (resMessage.text === 'passwords do not match') {
+      this.setState({ error: 'Passwords do not match' })
+      return
+    }
+
+    if (resMessage.text === 'duplicate email') {
+      this.setState({ error: `Email: ${resMessage.arg} alrady exist` })
+      return
+    }
+
+    if (resMessage.text === 'duplicate username') {
+      this.setState({ error: `User: ${resMessage.arg} alrady exist` })
+    }
   }
 
   handleChange (event) {
@@ -24,22 +46,21 @@ class Signup extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault()
-
-    // if (!this.state.name ||
-    // !this.state.email ||
-    // !this.state.pwd ||
-    // !this.state.pwdConf
-    // ) {
-    //   this.setState({ error: 'Every field must be filled' })
-    //   return
-    // }
-
-    // if (this.state.pwd !== this.state.pwdConf) {
-    //   this.setState({ error: 'Passwords dos not match' })
-    //   return
-    // }
-
     this.setState({ error: '' })
+
+    if (!this.state.name ||
+    !this.state.email ||
+    !this.state.pwd ||
+    !this.state.pwdConf
+    ) {
+      this.handleError({text: 'required field is not filled'})
+      return
+    }
+
+    if (this.state.pwd !== this.state.pwdConf) {
+      this.handleError({text: 'passwords do not match'})
+      return
+    }
 
     let regData = {
       username: this.state.name,
@@ -56,7 +77,7 @@ class Signup extends React.Component {
       .then(res => res.json())
       .then(res => {
         console.log(res)
-        if (res.type === 'error') this.setState({ error: res.message })
+        if (res.type === 'error') this.handleError(res)
       })
       .catch(err => console.log(err))
   }

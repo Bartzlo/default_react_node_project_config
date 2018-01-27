@@ -45,9 +45,10 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-  console.log('Error: ' + err.source + ': ' + err.message)
+  console.log(err.details || err.stack)
   res.status(err.status || 500)
-  res.send({type: 'error', status: err.status, message: err.message, source: err.source})
+  if (!err.details) err.details = {type: 'unknown error'}
+  res.send(err.details)
 })
 
 module.exports = app
