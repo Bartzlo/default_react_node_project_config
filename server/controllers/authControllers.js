@@ -17,20 +17,19 @@ exports.signup = function (req, res, next) {
   }
 
   let user = new User(req.body)
-  user.save(function (err, user) {
-    if (err) {
+  user.save()
+    .then(user => {
+      res.send({type: 'ok', text: 'new user created', arg: user.username, source: sourceName})
+    })
+    .catch(err => {
       if (err.message.indexOf('duplicate key') >= 0 && err.message.indexOf('email') >= 0) {
         return next(new ResponseError({type: 'error', text: 'duplicate email', arg: email, source: sourceName, status: 400}))
       }
       if (err.message.indexOf('duplicate key') >= 0 && err.message.indexOf('username' >= 0)) {
         return next(new ResponseError({type: 'error', text: 'duplicate username', arg: username, source: sourceName, status: 400}))
       }
-
       return next(new Error(err.message))
-    }
-
-    res.send({type: 'ok', text: 'new user created', arg: username, source: sourceName})
-  })
+    })
 }
 
 exports.signin = function (req, res, next) {

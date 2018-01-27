@@ -23,8 +23,12 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.pre('save', function (next) {
-  this.username = this.username + 'LOLOLO'
-  next()
+  bcrypt.hash(this.password, 10)
+    .then(res => {
+      this.password = res
+      next()
+    })
+    .catch(err => next(err))
 })
 
 module.exports = mongoose.model('users', userSchema)
