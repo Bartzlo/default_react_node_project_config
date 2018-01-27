@@ -62,7 +62,7 @@ class Signup extends React.Component {
       return
     }
 
-    let regData = {
+    let reqData = {
       username: this.state.name,
       email: this.state.email,
       password: this.state.pwd,
@@ -72,7 +72,7 @@ class Signup extends React.Component {
     fetch('/api/auth/signup', {
       method: 'post',
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
-      body: JSON.stringify(regData)
+      body: JSON.stringify(reqData)
     })
       .then(res => res.json())
       .then(res => {

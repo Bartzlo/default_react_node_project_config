@@ -1,13 +1,18 @@
 const express = require('express')
+const app = express()
 const mongoose = require('mongoose')
 const path = require('path')
+const bcrypt = require('bcrypt')
 const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const nocache = require('nocache')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
 
-const app = express()
+// models
+const User = require('./models/User')
 
 // connect to db
 mongoose.connect('mongodb://bart:123QWEasd@127.0.0.1:27017/blog?authMechanism=DEFAULT&authSource=blog')
@@ -24,11 +29,48 @@ mongoose.connect('mongodb://bart:123QWEasd@127.0.0.1:27017/blog?authMechanism=DE
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// config passport
+passport.use(new LocalStrategy(
+  function (username, password, done) {
+    let user
+    User.findOne({ username: username }).exec()
+      .then(res => {
+        if (!res) throw (new Error('user not found'))
+        user = res
+        return bcrypt.compare(password, user.password)
+      })
+      .then(isComare => {
+        if (!isComare) throw (new Error('incorrect password'))
+        return done(null, user)
+      })
+      .catch(err => {
+        console.log(err.stack)
+        if (err.message === 'user not found') return done(null, false, 'user not found')
+        if (err.message === 'incorrect password') return done(null, false, 'incorrect password')
+        return done(err)
+      })
+  }
+))
+
+passport.serializeUser(function (user, done) {
+  if (user) done(null, user.id)
+})
+
+passport.deserializeUser(function (id, done) {
+  User.findById(id).exec()
+    .then(user => done(null, user))
+    .catch(err => done(err, false))
+})
+
+// middlewars
 app.use(nocache())
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(passport.initialize())
+// app.use(passport.session())
 app.use(express.static(path.join(__dirname, '../client/build')))
 
 app.use('/api', require('./routes/api'))

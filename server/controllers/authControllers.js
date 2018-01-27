@@ -1,3 +1,4 @@
+const passport = require('passport')
 const User = require('../models/User')
 const ResponseError = require('../lib/ResponseError')
 
@@ -33,7 +34,17 @@ exports.signup = function (req, res, next) {
 }
 
 exports.signin = function (req, res, next) {
-  res.send('Login user')
+  passport.authenticate('local', function (err, user, info) {
+    if (err) { return next(err) }
+    if (!user) {
+      res.status(401)
+      res.send(info)
+    }
+    req.logIn(user, function (err) {
+      if (err) { return next(err) }
+      return res.send(user)
+    })
+  })(req, res, next)
 }
 
 exports.signout = function (req, res, next) {
