@@ -52,6 +52,7 @@ class Signin extends React.Component {
     fetch('/api/auth/signin', {
       method: 'post',
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      credentials: 'same-origin',
       body: JSON.stringify(reqData)
     })
       .then(res => res.json())

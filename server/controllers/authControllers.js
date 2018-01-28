@@ -35,24 +35,29 @@ exports.signup = function (req, res, next) {
 }
 
 exports.signin = function (req, res, next) {
+  let {username, password} = req.body
   let sourceName = 'authController.signin'
-  console.log(req.cookies);
-  res.send({mess: 'qwe'})
-  // Session.findById(req.session.id, function (err, session) {
-  //   if (err) return next(new Error(err.message))
-  //   if (session) return next(new ResponseError({type: 'error', message: 'authentication has already been completed', status: 400}))
 
-  //   passport.authenticate('local', function (err, user, info) {
-  //     if (err) { return next(err) }
-  //     if (!user) {
-  //       return next(new ResponseError({type: 'error', message: info, source: sourceName, status: 401}))
-  //     }
-  //     req.logIn(user, function (err) {
-  //       if (err) { return next(err) }
-  //       return res.send(user)
-  //     })
-  //   })(req, res, next)
-  // })
+  if (!username ||
+  !password) {
+    return next(new ResponseError({type: 'error', message: 'required field is not filled', source: sourceName, status: 400}))
+  }
+
+  Session.findById(req.session.id, function (err, session) {
+    if (err) return next(new Error(err.message))
+    if (session) return next(new ResponseError({type: 'error', message: 'authentication has been already completed', source: sourceName, status: 400}))
+
+    passport.authenticate('local', function (err, user, info) {
+      if (err) { return next(err) }
+      if (!user) {
+        return next(new ResponseError({type: 'error', message: info, source: sourceName, status: 401}))
+      }
+      req.logIn(user, function (err) {
+        if (err) { return next(err) }
+        return res.send(user)
+      })
+    })(req, res, next)
+  })
 }
 
 exports.signout = function (req, res, next) {
