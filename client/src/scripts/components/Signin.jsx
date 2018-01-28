@@ -14,12 +14,12 @@ class Signin extends React.Component {
   }
 
   handleError (resMessage) {
-    if (resMessage.text === 'required field is not filled') {
+    if (resMessage.message === 'required field is not filled') {
       this.setState({ error: 'Required field is not filled' })
       return
     }
 
-    if (resMessage.text === 'incorrect username or password') {
+    if (resMessage.message === 'incorrect username or password') {
       this.setState({ error: 'Incorrect username or password' })
       return
     }
@@ -40,7 +40,7 @@ class Signin extends React.Component {
     if (!this.state.name ||
     !this.state.pwd
     ) {
-      this.handleError({text: 'required field is not filled'})
+      this.handleError({message: 'required field is not filled'})
       return
     }
 
@@ -54,7 +54,7 @@ class Signin extends React.Component {
       headers: { 'Content-type': 'application/json; charset=UTF-8' },
       body: JSON.stringify(reqData)
     })
-      .then(res => res.text())
+      .then(res => res.json())
       .then(res => {
         console.log(res)
         if (res.type === 'error') this.handleError(res)

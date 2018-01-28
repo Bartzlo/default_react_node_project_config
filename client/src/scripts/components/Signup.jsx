@@ -16,22 +16,22 @@ class Signup extends React.Component {
   }
 
   handleError (resMessage) {
-    if (resMessage.text === 'required field is not filled') {
+    if (resMessage.message === 'required field is not filled') {
       this.setState({ error: 'Required field is not filled' })
       return
     }
 
-    if (resMessage.text === 'passwords do not match') {
+    if (resMessage.message === 'passwords do not match') {
       this.setState({ error: 'Passwords do not match' })
       return
     }
 
-    if (resMessage.text === 'duplicate email') {
+    if (resMessage.message === 'duplicate email') {
       this.setState({ error: `Email: ${resMessage.arg} alrady exist` })
       return
     }
 
-    if (resMessage.text === 'duplicate username') {
+    if (resMessage.message === 'duplicate username') {
       this.setState({ error: `User: ${resMessage.arg} alrady exist` })
     }
   }
@@ -53,12 +53,12 @@ class Signup extends React.Component {
     !this.state.pwd ||
     !this.state.pwdConf
     ) {
-      this.handleError({text: 'required field is not filled'})
+      this.handleError({message: 'required field is not filled'})
       return
     }
 
     if (this.state.pwd !== this.state.pwdConf) {
-      this.handleError({text: 'passwords do not match'})
+      this.handleError({message: 'passwords do not match'})
       return
     }
 
