@@ -4,8 +4,8 @@ const Session = require('../models/Session')
 const ResponseError = require('../lib/ResponseError')
 
 exports.signup = function (req, res, next) {
-  let {username, email, password, passwordConf} = req.body
   let sourceName = 'authController.signup'
+  let {username, email, password, passwordConf} = req.body
 
   if (!username ||
   !email ||
@@ -21,7 +21,7 @@ exports.signup = function (req, res, next) {
   let user = new User(req.body)
   user.save()
     .then(user => {
-      res.send({type: 'ok', message: 'new user created', arg: user.username, source: sourceName})
+      res.send({type: 'ok', message: 'new user created', arg: {username: user.username}})
     })
     .catch(err => {
       if (err.message.indexOf('duplicate key') >= 0 && err.message.indexOf('email') >= 0) {
@@ -35,8 +35,8 @@ exports.signup = function (req, res, next) {
 }
 
 exports.signin = function (req, res, next) {
-  let {username, password} = req.body
   let sourceName = 'authController.signin'
+  let {username, password} = req.body
 
   if (!username ||
   !password) {
@@ -45,7 +45,7 @@ exports.signin = function (req, res, next) {
 
   Session.findById(req.session.id, function (err, session) {
     if (err) return next(new Error(err.message))
-    if (session) return next(new ResponseError({type: 'error', message: 'authentication has been already completed', source: sourceName, status: 400}))
+    if (session) return next(new ResponseError({type: 'error', message: 'login has already been completed', source: sourceName, status: 400}))
 
     passport.authenticate('local', function (err, user, info) {
       if (err) { return next(err) }
@@ -54,12 +54,21 @@ exports.signin = function (req, res, next) {
       }
       req.logIn(user, function (err) {
         if (err) { return next(err) }
-        return res.send(user)
+        return res.send({type: 'ok', message: 'login seccessful'})
       })
     })(req, res, next)
   })
 }
 
 exports.signout = function (req, res, next) {
-  res.send('Logout user')
+  let sourceName = 'authController.signout'
+  Session.findById(req.session.id).exec()
+    .then(sessin => {
+      if (!sessin) return next(new ResponseError({type: 'error', message: 'login not yet done', source: sourceName, status: 401}))
+      sessin.remove()
+      req.session.destroy(() => {})
+      req.logout()
+      res.send({type: 'ok', message: 'logout seccessful'})
+    })
+    .catch(err => next(new Error(err.message)))
 }

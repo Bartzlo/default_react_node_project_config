@@ -33,7 +33,7 @@ mongoose.connect('mongodb://bart:123QWEasd@127.0.0.1:27017/blog?authMechanism=DE
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // config passport
-passport.use(new LocalStrategy(
+passport.use('local', new LocalStrategy(
   function (username, password, done) {
     let user
     User.findOne({ username: username }).exec()
@@ -74,7 +74,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(session({
   secret: 'dd6s-rf5',
   saveUninitialized: false,
-  resave: true,
+  resave: false,
   store: new MongoStore({
     mongooseConnection: mongoose.connection
   }),

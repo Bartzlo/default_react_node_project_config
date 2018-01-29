@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Signout from './Signout'
 
 class UserMenu extends React.Component {
   constructor (props) {
@@ -14,7 +15,7 @@ class UserMenu extends React.Component {
         <h3>User menu</h3>
         <Link to="/signup">Signup </Link>
         <Link to="/signin">Signin </Link>
-        <a href="#">Signout</a>
+        <Signout />
       </div>
     )
   }

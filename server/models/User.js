@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  group: {
+    type: String,
+    default: 'user'
   }
 })
 

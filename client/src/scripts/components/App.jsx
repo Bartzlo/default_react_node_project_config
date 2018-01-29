@@ -1,12 +1,12 @@
 import { Route, Switch } from 'react-router-dom'
 import MainMenu from './MainMenu'
-import UserMenu from './UserMenu'
+import UserMenu from './auth/UserMenu'
 import HomePage from './HomePage'
 import PrivatePage from './PrivatePage'
 import PublicPage from './PublicPage'
 import Profile from './Profile'
-import Signin from './Signin'
-import Signup from './Signup'
+import Signin from './auth/Signin'
+import Signup from './auth/Signup'
 import Page404 from './Page404'
 
 const App = (props) => (
