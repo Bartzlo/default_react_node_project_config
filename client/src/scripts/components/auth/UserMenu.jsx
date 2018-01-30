@@ -1,23 +1,31 @@
 import { Link } from 'react-router-dom'
 import Signout from './Signout'
+// import User from '../../store/User'
+// import state from '../../store/state'
 
 class UserMenu extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      userName: ''
-    }
-  }
-
   render () {
-    return (
-      <div>
-        <h3>User menu</h3>
-        <Link to="/signup">Signup </Link>
-        <Link to="/signin">Signin </Link>
-        <Signout />
-      </div>
-    )
+    let elem = null
+    if (this.props.userName) {
+      elem = (
+        <div className="user-menu">
+          <h4>User menu</h4>
+          <p>User: {this.props.userName}</p>
+          <Signout changeUser={this.props.changeUser} />
+        </div>
+      )
+    } else {
+      elem = (
+        <div className="user-menu">
+          <h3>User menu</h3>
+          <Link to="/signin">Signin</Link>
+          <p>or</p>
+          <Link to="/signup">Signup</Link>
+        </div>
+      )
+    }
+
+    return elem
   }
 }
 

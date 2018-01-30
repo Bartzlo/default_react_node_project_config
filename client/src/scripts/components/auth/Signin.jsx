@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 class Signin extends React.Component {
   constructor (props) {
     super(props)
@@ -13,16 +15,13 @@ class Signin extends React.Component {
     this.handleError = this.handleError.bind(this)
   }
 
-  handleError (resMessage) {
-    if (resMessage.message === 'required field is not filled') {
+  handleError (res) {
+    if (res.message === 'required field is not filled') {
       this.setState({ error: 'Required field is not filled' })
       return
     }
 
-    if (resMessage.message === 'incorrect username or password') {
-      this.setState({ error: 'Incorrect username or password' })
-      return
-    }
+    this.setState({ error: res })
   }
 
   handleChange (event) {
@@ -58,7 +57,8 @@ class Signin extends React.Component {
       .then(res => res.json())
       .then(res => {
         console.log(res)
-        if (res.type === 'error') this.handleError(res)
+        if (res.type === 'ok') this.props.channgeUser(res.arg.username)
+        if (res.type === 'error') this.handleError(res.message)
       })
       .catch(err => console.log(err))
   }
@@ -68,32 +68,25 @@ class Signin extends React.Component {
       <div>
         <h2>Singnin form</h2>
         <form onSubmit={this.handleSubmit}>
-          <ul>
-            <li>
-              <label>
-          Name:
-                <input type="text" value={this.state.name} onChange={this.handleChange} name="name" />
-              </label>
-            </li>
-            <li>
-              <label>
-          Password:
-                <input type="text" value={this.state.pwd} onChange={this.handleChange} name="pwd" />
-              </label>
-            </li>
-            <li>
-              <label>
-                Submit
-                <input type="submit"/>
-              </label>
-            </li>
-            {this.state.error
-              ? <li>{this.state.error}</li>
-              : null
-            }
-          </ul>
-
+          <p>
+            <label>
+            Name:
+              <br/><input type="text" value={this.state.name} onChange={this.handleChange} name="name" />
+            </label><br/>
+            <label>
+            Password:
+              <br/><input type="text" value={this.state.pwd} onChange={this.handleChange} name="pwd" />
+            </label><br/>
+            <label>
+              <br/><input type="submit"/>
+            </label>
+          </p>
+          {this.state.error
+            ? <p class="form-error">{this.state.error}</p>
+            : null
+          }
         </form>
+        <p>New user? <Link to="/signup">Create an account</Link></p>
       </div>
     )
   }

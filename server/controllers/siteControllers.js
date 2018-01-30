@@ -3,9 +3,9 @@ exports.profile = function (req, res, next) {
     type: 'ok',
     message: 'profile page',
     arg: {
-      name: req.user.username,
+      userName: req.user.username,
       email: req.user.email,
-      group: req.user.group
+      userGroup: req.user.group
     }
   })
 }
@@ -14,7 +14,9 @@ exports.adminPage = function (req, res, next) {
   res.send({
     type: 'ok',
     message: 'admin page',
-    arg: 'Very secret admin info'
+    arg: {
+      text: 'Very secret admin info'
+    }
   })
 }
 

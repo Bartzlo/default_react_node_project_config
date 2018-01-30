@@ -1,19 +1,19 @@
 import { Link } from 'react-router-dom'
 
 const MainMenu = (props) => (
-  <nav>
-    <h3>Main menu</h3>
-    <ul>
-      <li>
+  <nav className="main-menu">
+    <h3 className="main-menu_header">Main menu</h3>
+    <ul className="main-menu__list">
+      <li className="main-menu__item">
         <Link to="/">Home</Link>
       </li>
-      <li>
-        <Link to="/private-page">Private</Link>
+      <li className="main-menu__item">
+        <Link to="/admin">Admin page</Link>
       </li>
-      <li>
+      <li className="main-menu__item">
         <Link to="/public-page">Public</Link>
       </li>
-      <li>
+      <li className="main-menu__item">
         <Link to="/profile">Profile</Link>
       </li>
     </ul>

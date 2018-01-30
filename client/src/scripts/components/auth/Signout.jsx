@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 class Signout extends React.Component {
   constructor () {
     super()
@@ -12,14 +14,15 @@ class Signout extends React.Component {
       .then(res => res.json())
       .then(res => {
         console.log(res)
-        // if (res.type === 'error') this.handleError(res)
+        this.props.changeUser(false)
+
       })
       .catch(err => console.log(err))
   }
 
   render () {
     return (
-      <a href="#" onClick={this.handleClick}>Signout</a>
+      <Link to="/" onClick={this.handleClick}>Signout</Link>
     )
   }
 }

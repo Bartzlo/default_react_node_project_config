@@ -1,6 +1,6 @@
 const ResponseError = require('./lib/ResponseError')
 
-exports.isAuth = function (group = []) {
+exports.isAuth = function (groups = []) {
   return (
     function (req, res, next) {
       if (!req.isAuthenticated()) {
@@ -8,12 +8,21 @@ exports.isAuth = function (group = []) {
       }
 
       let isChecked = true
-      if (group.length > 0) {
-        isChecked = !!group.find(val => val === req.user.group)
+      if (groups.length > 0) {
+        isChecked = !!groups.find(val => val === req.user.group)
       }
 
       if (!isChecked) {
-        return next(new ResponseError({type: 'error', message: 'not enough rights', arg: req.user.group, status: 401}))
+        return next(new ResponseError({
+          type: 'error',
+          message: 'not enough rights',
+          arg: {
+            userName: req.user.username,
+            userGroup: req.user.group,
+            groupList: groups
+          },
+          status: 401
+        }))
       }
 
       next()

@@ -15,25 +15,28 @@ class Signup extends React.Component {
     this.handleError = this.handleError.bind(this)
   }
 
-  handleError (resMessage) {
-    if (resMessage.message === 'required field is not filled') {
+  handleError (res) {
+    if (res.message === 'required field is not filled') {
       this.setState({ error: 'Required field is not filled' })
       return
     }
 
-    if (resMessage.message === 'passwords do not match') {
+    if (res.message === 'passwords do not match') {
       this.setState({ error: 'Passwords do not match' })
       return
     }
 
-    if (resMessage.message === 'duplicate email') {
-      this.setState({ error: `Email: ${resMessage.arg} alrady exist` })
+    if (res.message === 'duplicate email') {
+      this.setState({ error: `Email: ${res.arg} alrady exist` })
       return
     }
 
-    if (resMessage.message === 'duplicate username') {
-      this.setState({ error: `User: ${resMessage.arg} alrady exist` })
+    if (res.message === 'duplicate username') {
+      this.setState({ error: `User: ${res.arg} alrady exist` })
+      return
     }
+
+    this.setState({ error: res })
   }
 
   handleChange (event) {
@@ -77,6 +80,21 @@ class Signup extends React.Component {
       .then(res => res.json())
       .then(res => {
         console.log(res)
+        if (res.type === 'ok') {
+          fetch('/api/auth/signin', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json; charset=UTF-8' },
+            credentials: 'same-origin',
+            body: JSON.stringify(reqData)
+          })
+            .then(res => res.json())
+            .then(res => {
+              console.log(res)
+              if (res.type === 'ok') this.props.channgeUser(res.arg.username)
+              if (res.type === 'error') this.handleError(res.message)
+            })
+            .catch(err => console.log(err))
+        }
         if (res.type === 'error') this.handleError(res)
       })
       .catch(err => console.log(err))
@@ -87,43 +105,31 @@ class Signup extends React.Component {
       <div>
         <h2>Singnup form</h2>
         <form onSubmit={this.handleSubmit}>
-          <ul>
-            <li>
-              <label>
-          Name:
-                <input type="text" value={this.state.name} onChange={this.handleChange} name="name" />
-              </label>
-            </li>
-            <li>
-              <label>
-          E-mail:
-                <input type="email" value={this.state.email} onChange={this.handleChange} name="email" id=""/>
-              </label>
-            </li>
-            <li>
-              <label>
-          Password:
-                <input type="text" value={this.state.pwd} onChange={this.handleChange} name="pwd" />
-              </label>
-            </li>
-            <li>
-              <label>
-          Confirm password:
-                <input type="text" value={this.state.pwdConf} onChange={this.handleChange} name="pwdConf" />
-              </label>
-            </li>
-            <li>
-              <label>
-                Submit
-                <input type="submit"/>
-              </label>
-            </li>
-            {this.state.error
-              ? <li>{this.state.error}</li>
-              : null
-            }
-          </ul>
-
+          <p>
+            <label>
+            Name:
+              <br/><input type="text" value={this.state.name} onChange={this.handleChange} name="name" />
+            </label><br/>
+            <label>
+            E-mail:
+              <br/><input type="email" value={this.state.email} onChange={this.handleChange} name="email" id=""/>
+            </label><br/>
+            <label>
+            Password:
+              <br/><input type="text" value={this.state.pwd} onChange={this.handleChange} name="pwd" />
+            </label><br/>
+            <label>
+            Confirm password:
+              <br/><input type="text" value={this.state.pwdConf} onChange={this.handleChange} name="pwdConf" />
+            </label><br/>
+            <label>
+              <br/><input type="submit"/>
+            </label>
+          </p>
+          {this.state.error
+            ? <p className="form-error">{this.state.error}</p>
+            : null
+          }
         </form>
       </div>
     )

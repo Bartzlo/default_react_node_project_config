@@ -54,7 +54,7 @@ exports.signin = function (req, res, next) {
       }
       req.logIn(user, function (err) {
         if (err) { return next(err) }
-        return res.send({type: 'ok', message: 'login seccessful'})
+        return res.send({type: 'ok', message: 'login seccessful', arg: {username: user.username}})
       })
     })(req, res, next)
   })
@@ -71,4 +71,8 @@ exports.signout = function (req, res, next) {
       res.send({type: 'ok', message: 'logout seccessful'})
     })
     .catch(err => next(new Error(err.message)))
+}
+
+exports.checkUser = function (req, res, next) {
+  res.send({type: 'ok', message: 'checked', arg: {username: req.isAuthenticated() && req.user.username}})
 }

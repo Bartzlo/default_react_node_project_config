@@ -1,7 +1,7 @@
 import privateElemReq from '../lib/privateElemReq'
 import privateElemHandleError from '../lib/privateElemHandleError'
 
-class Profile extends React.Component {
+class AdminPage extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -11,7 +11,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount () {
-    privateElemReq('/api/site/profile')
+    privateElemReq('/api/site/admin-page')
       .then(res => this.setState({response: res}))
       .catch(err => this.setState({error: err}))
   }
@@ -23,13 +23,9 @@ class Profile extends React.Component {
     let elem = !response && !error ? null
       : privateElemHandleError(response, error) || (
         <div>
-          <h2>Profile page</h2>
-          <p>Welcome, {response.arg.userName}</p>
-          <hr/>
-          <h4>Account info</h4>
-          <p>Name: {response.arg.userName}</p>
-          <p>E-mail: {response.arg.email}</p>
-          <p>Group: {response.arg.userGroup}</p>
+          <h2>Admin page</h2>
+          <p>Welcome!</p>
+          <p>Dynamic data: {response.arg.text}</p>
         </div>
       )
 
@@ -37,4 +33,4 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile
+export default AdminPage
