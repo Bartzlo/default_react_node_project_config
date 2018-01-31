@@ -116,11 +116,11 @@ class Signup extends React.Component {
             </label><br/>
             <label>
             Password:
-              <br/><input type="text" value={this.state.pwd} onChange={this.handleChange} name="pwd" />
+              <br/><input type="password" value={this.state.pwd} onChange={this.handleChange} name="pwd" />
             </label><br/>
             <label>
             Confirm password:
-              <br/><input type="text" value={this.state.pwdConf} onChange={this.handleChange} name="pwdConf" />
+              <br/><input type="password" value={this.state.pwdConf} onChange={this.handleChange} name="pwdConf" />
             </label><br/>
             <label>
               <br/><input type="submit"/>

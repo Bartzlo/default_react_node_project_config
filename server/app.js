@@ -1,3 +1,4 @@
+const fs = require('fs')
 const express = require('express')
 const app = express()
 const session = require('express-session')
@@ -12,12 +13,17 @@ const bodyParser = require('body-parser')
 const nocache = require('nocache')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+require('dotenv').config()
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
 
 // models
 const User = require('./models/User')
 
 // connect to db
-mongoose.connect('mongodb://bart:123QWEasd@127.0.0.1:27017/blog?authMechanism=DEFAULT&authSource=blog')
+mongoose.connect(process.env.DB_PATH, {
+  user: process.env.DB_USER,
+  pass: process.env.DB_PASS
+})
   .then(() => {
     console.log('Mongoose has been connected to base')
   })
@@ -28,9 +34,6 @@ mongoose.connect('mongodb://bart:123QWEasd@127.0.0.1:27017/blog?authMechanism=DE
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'))
 // app.set('view engine', 'jade')
-
-// uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // config passport
 passport.use('local', new LocalStrategy(
@@ -67,12 +70,13 @@ passport.deserializeUser(function (id, done) {
 
 // middlewars
 app.use(nocache())
+// app.use(logger('short', {stream: accessLogStream}))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 // app.use(cookieParser())
 app.use(session({
-  secret: 'dd6s-rf5',
+  secret: process.env.SESSION_SECRET,
   saveUninitialized: false,
   resave: false,
   store: new MongoStore({
@@ -84,6 +88,7 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(favicon(path.join(__dirname, '../client/build', 'favicon.ico')))
 app.use(express.static(path.join(__dirname, '../client/build')))
 
 app.use('/api', require('./routes/api'))
