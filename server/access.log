@@ -1,16 +1,10 @@
-::1 - POST /api/auth/signin HTTP/1.1 401 89 - 92.872 ms
-::1 - POST /api/auth/signin HTTP/1.1 200 67 - 139.998 ms
-::1 - GET /api/site/profile HTTP/1.1 200 104 - 16.762 ms
-::1 - GET /api/site/profile HTTP/1.1 500 24 - 26.851 ms
-::1 - GET /profile HTTP/1.1 200 374 - 26.192 ms
-::1 - GET /styles/main.css HTTP/1.1 200 2061 - 10.806 ms
-::1 - GET /bundle.js HTTP/1.1 200 2360344 - 17.885 ms
-::1 - GET /api/site/profile HTTP/1.1 401 60 - 34.505 ms
-::1 - GET /api/auth/check HTTP/1.1 200 58 - 2.665 ms
-::1 - POST /api/auth/signin HTTP/1.1 200 67 - 190.280 ms
-::1 - GET /api/site/profile HTTP/1.1 200 104 - 17.232 ms
-::1 - GET /api/site/admin-page HTTP/1.1 401 125 - 25.378 ms
-::1 - POST /api/auth/signout HTTP/1.1 200 43 - 14.523 ms
-::1 - POST /api/auth/signin HTTP/1.1 200 69 - 121.028 ms
-::1 - GET /api/site/admin-page HTTP/1.1 200 76 - 11.260 ms
-::1 - GET /api/site/profile HTTP/1.1 200 114 - 11.390 ms
+::1 - - [01/Feb/2018:12:18:37 +0000] "GET / HTTP/1.1" 200 374 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+::1 - - [01/Feb/2018:12:18:39 +0000] "GET /styles/main.css HTTP/1.1" 200 453 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+::1 - - [01/Feb/2018:12:18:39 +0000] "GET /bundle.js HTTP/1.1" 200 197206 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+::1 - - [01/Feb/2018:12:18:40 +0000] "GET /api/auth/check HTTP/1.1" 200 72 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+::1 - - [01/Feb/2018:12:18:42 +0000] "GET /api/site/profile HTTP/1.1" 401 60 "http://localhost:3000/profile" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+::1 - - [01/Feb/2018:12:18:43 +0000] "GET /api/site/admin-page HTTP/1.1" 401 60 "http://localhost:3000/admin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+::1 - - [01/Feb/2018:12:56:06 +0000] "GET / HTTP/1.1" 200 374 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+::1 - - [01/Feb/2018:12:56:07 +0000] "GET /styles/main.css HTTP/1.1" 200 2061 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+::1 - - [01/Feb/2018:12:56:07 +0000] "GET /bundle.js HTTP/1.1" 200 2349216 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+::1 - - [01/Feb/2018:12:56:09 +0000] "GET /api/auth/check HTTP/1.1" 200 72 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"

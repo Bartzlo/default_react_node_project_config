@@ -1,10 +1,13 @@
 exports.profile = function (req, res, next) {
+  let name = req.user.local.username || req.user.google.name
+  let email = req.user.local.email || req.user.google.email
+
   res.send({
     type: 'ok',
     message: 'profile page',
     arg: {
-      userName: req.user.username,
-      email: req.user.email,
+      userName: name,
+      email: email,
       userGroup: req.user.group
     }
   })

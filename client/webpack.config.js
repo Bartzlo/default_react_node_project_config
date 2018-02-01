@@ -1,6 +1,6 @@
 'use strict'
 
-const dev = true
+require('dotenv').config()
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
@@ -13,7 +13,7 @@ module.exports = {
   output: {
     filename: '[name].js'
   },
-  
+
   resolve: {
     extensions: ['.js', '.jsx']
   },
@@ -25,13 +25,13 @@ module.exports = {
   },
 
   plugins: [
-    new UglifyJsPlugin({test: dev ? /\.disabled/ : /\.js$/}),
+    new UglifyJsPlugin({test: process.env.DEV ? /\.disabled/ : /\.js$/}),
     new webpack.ProvidePlugin({
-      React: dev ? 'react/umd/react.development.js' : 'react/umd/react.production.min.js',
-      ReactDOM: dev ? 'react-dom/umd/react-dom.development.js' : 'react-dom/umd/react-dom.production.min.js'
+      React: process.env.DEV ? 'react/umd/react.development.js' : 'react/umd/react.production.min.js',
+      ReactDOM: process.env.DEV ? 'react-dom/umd/react-dom.development.js' : 'react-dom/umd/react-dom.production.min.js'
     })
   ],
 
-  // devtool: dev ? 'source-map' : '', // for IE and EDGE debug
-  devtool: dev ? 'eval-source-map' : ''
+  // devtool: process.env.DEV ? 'source-map' : '', // for IE and EDGE debug
+  devtool: process.env.DEV ? 'eval-source-map' : ''
 }

@@ -2,37 +2,44 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true,
-    trim: true,
-    lowercase: true
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-    trim: true,
-    lowercase: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
   group: {
     type: String,
     default: 'user'
+  },
+  local: {
+    username: {
+      type: String,
+      unique: true
+    },
+    email: {
+      type: String,
+      unique: true
+    },
+    password: String
+  },
+  google: {
+    id: String,
+    token: String,
+    email: String,
+    name: String
   }
 })
 
+/**
+ * Hashing password for loclcal user accounts
+ */
+
 userSchema.pre('save', function (next) {
-  bcrypt.hash(this.password, 10)
-    .then(res => {
-      this.password = res
-      next()
-    })
-    .catch(err => next(err))
+  if (this.local.password) {
+    bcrypt.hash(this.local.password, 10)
+      .then(res => {
+        this.local.password = res
+        next()
+      })
+      .catch(err => next(err))
+  } else {
+    next()
+  }
 })
 
 module.exports = mongoose.model('users', userSchema)

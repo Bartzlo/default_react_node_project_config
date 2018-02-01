@@ -1,6 +1,6 @@
 'use strict'
 
-const dev = true
+require('dotenv').config()
 
 const gulp = require('gulp')
 const wait = require('gulp-wait')
@@ -40,11 +40,11 @@ gulp.task('build-html', () => {
 
 gulp.task('build-style', () => {
   return gulp.src('src/styles/main.scss')
-    .pipe(dev ? sourcemaps.init() : wait(0))
+    .pipe(process.env.DEV ? sourcemaps.init() : wait(0))
     .pipe(wait(300))
     .pipe(sass())
     .pipe(cleanCSS())
-    .pipe(dev ? sourcemaps.write() : wait(0))
+    .pipe(process.env.DEV ? sourcemaps.write() : wait(0))
     .pipe(gulp.dest('build/styles/'))
     .pipe(wait(100))
     // .pipe(browserSync.stream())

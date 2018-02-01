@@ -8,27 +8,55 @@ exports.signup = function (req, res, next) {
   let {username, email, password, passwordConf} = req.body
 
   if (!username ||
-  !email ||
-  !password ||
-  !passwordConf) {
-    return next(new ResponseError({type: 'error', message: 'required field is not filled', source: sourceName, status: 400}))
+      !email ||
+      !password ||
+      !passwordConf) {
+    return next(new ResponseError({
+      type: 'error',
+      message: 'required field is not filled',
+      source: sourceName,
+      status: 400
+    }))
   }
 
   if (password !== passwordConf) {
-    return next(new ResponseError({type: 'error', message: 'passwords do not match', source: sourceName, status: 400}))
+    return next(new ResponseError({
+      type: 'error',
+      message: 'passwords do not match',
+      source: sourceName,
+      status: 400
+    }))
   }
 
-  let user = new User(req.body)
+  let user = new User({local: req.body})
+
   user.save()
     .then(user => {
-      res.send({type: 'ok', message: 'new user created', arg: {username: user.username}})
+      res.send({
+        type: 'ok',
+        message: 'new user created',
+        arg: {username: user.username}
+      })
     })
     .catch(err => {
-      if (err.message.indexOf('duplicate key') >= 0 && err.message.indexOf('email') >= 0) {
-        return next(new ResponseError({type: 'error', message: 'duplicate email', arg: email, source: sourceName, status: 400}))
+      if (err.message.indexOf('duplicate key') >= 0 &&
+          err.message.indexOf('email') >= 0) {
+        return next(new ResponseError({
+          type: 'error',
+          message: 'duplicate email',
+          arg: email,
+          source: sourceName,
+          status: 400
+        }))
       }
-      if (err.message.indexOf('duplicate key') >= 0 && err.message.indexOf('username' >= 0)) {
-        return next(new ResponseError({type: 'error', message: 'duplicate username', arg: username, source: sourceName, status: 400}))
+      if (err.message.indexOf('duplicate key') >= 0 &&
+          err.message.indexOf('username' >= 0)) {
+        return next(new ResponseError({
+          type: 'error',
+          message: 'duplicate username',
+          arg: username,
+          source: sourceName,
+          status: 400}))
       }
       return next(new Error(err.message))
     })
@@ -36,25 +64,47 @@ exports.signup = function (req, res, next) {
 
 exports.signin = function (req, res, next) {
   let sourceName = 'authController.signin'
-  let {username, password} = req.body
+  let {email, password} = req.body
 
-  if (!username ||
+  if (!email ||
   !password) {
-    return next(new ResponseError({type: 'error', message: 'required field is not filled', source: sourceName, status: 400}))
+    return next(new ResponseError({
+      type: 'error',
+      message: 'required field is not filled',
+      source: sourceName,
+      status: 400
+    }))
   }
 
   Session.findById(req.session.id, function (err, session) {
     if (err) return next(new Error(err.message))
-    if (session) return next(new ResponseError({type: 'error', message: 'login has already been completed', source: sourceName, status: 400}))
+
+    if (session) {
+      return next(new ResponseError({
+        type: 'error',
+        message: 'login has already been completed',
+        source: sourceName,
+        status: 400
+      }))
+    }
 
     passport.authenticate('local', function (err, user, info) {
       if (err) { return next(err) }
       if (!user) {
-        return next(new ResponseError({type: 'error', message: info, source: sourceName, status: 401}))
+        return next(new ResponseError({
+          type: 'error',
+          message: info,
+          source: sourceName,
+          status: 401
+        }))
       }
       req.logIn(user, function (err) {
         if (err) { return next(err) }
-        return res.send({type: 'ok', message: 'login seccessful', arg: {username: user.username}})
+        return res.send({
+          type: 'ok',
+          message: 'login seccessful',
+          arg: {username: user.local.username}
+        })
       })
     })(req, res, next)
   })
@@ -62,9 +112,18 @@ exports.signin = function (req, res, next) {
 
 exports.signout = function (req, res, next) {
   let sourceName = 'authController.signout'
+
   Session.findById(req.session.id).exec()
     .then(sessin => {
-      if (!sessin) return next(new ResponseError({type: 'error', message: 'login not yet done', source: sourceName, status: 401}))
+      if (!sessin) {
+        return next(new ResponseError({
+          type: 'error',
+          message: 'login not yet done',
+          source: sourceName,
+          status: 401
+        }))
+      }
+
       sessin.remove()
       req.session.destroy(() => {})
       req.logout()
@@ -74,5 +133,34 @@ exports.signout = function (req, res, next) {
 }
 
 exports.checkUser = function (req, res, next) {
-  res.send({type: 'ok', message: 'checked', arg: {username: req.isAuthenticated() && req.user.username}})
+  let name = null
+
+  if (req.isAuthenticated()) {
+    name = req.user.local.username || req.user.google.name
+  }
+
+  res.send({
+    type: 'ok',
+    message: 'checked',
+    isAuth: !!name,
+    arg: {username: name}})
+}
+
+exports.googleCallback = function (req, res, next) {
+  let sourceName = 'authController.googleCallback'
+  passport.authenticate('google', function (err, user, info) {
+    if (err) return next(err)
+    if (!user) {
+      return next(new ResponseError({
+        type: 'error',
+        message: info,
+        source: sourceName,
+        status: 401
+      }))
+    }
+    req.logIn(user, function (err) {
+      if (err) { return next(err) }
+      return res.redirect('/')
+    })
+  })(req, res, next)
 }

@@ -44,7 +44,7 @@ class Signin extends React.Component {
     }
 
     let reqData = {
-      username: this.state.name,
+      email: this.state.name,
       password: this.state.pwd
     }
 
@@ -70,8 +70,8 @@ class Signin extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <p>
             <label>
-            Name:
-              <br/><input type="text" value={this.state.name} onChange={this.handleChange} name="name" />
+            E-mail:
+              <br/><input type="email" value={this.state.name} onChange={this.handleChange} name="name" />
             </label><br/>
             <label>
             Password:
@@ -82,11 +82,13 @@ class Signin extends React.Component {
             </label>
           </p>
           {this.state.error
-            ? <p class="form-error">{this.state.error}</p>
+            ? <p className="form-error">{this.state.error}</p>
             : null
           }
         </form>
         <p>New user? <Link to="/signup">Create an account</Link></p>
+        <p>or</p>
+        <a href="/api/auth/google">Login with Google account</a>
       </div>
     )
   }

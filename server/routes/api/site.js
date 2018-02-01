@@ -1,12 +1,11 @@
-const passport = require('passport')
 const express = require('express')
 const router = express.Router()
 
-const isAuth = require('../../middleware').isAuth
-const site_controllers = require('../../controllers/siteControllers')
+const isAuth = require('../../middlewares').isAuth
+const siteControllers = require('../../controllers/siteControllers')
 
-router.get('/profile', isAuth(), site_controllers.profile)
-router.get('/admin-page', isAuth(['admin']), site_controllers.adminPage)
-router.get('/public-page', site_controllers.publicPage)
+router.get('/profile', isAuth(), siteControllers.profile)
+router.get('/admin-page', isAuth(['admin', 'moderator']), siteControllers.adminPage)
+router.get('/public-page', siteControllers.publicPage)
 
 module.exports = router

@@ -20,6 +20,7 @@ function handleError (response, error) {
       </div>
     )
   } else if (response.message === 'not enough rights') {
+    let groupList = response.arg.groupList.map(group => group + ' ')
     elem = (
       <div>
         <h4>Hello {response.arg.userName}!</h4>
@@ -27,7 +28,7 @@ function handleError (response, error) {
         <hr/>
         <h4>Details</h4>
         <p>You grou: {response.arg.userGroup}</p>
-        <p>Access available for groups: {response.arg.groupList}</p>
+        <p>Access available for groups: {groupList}</p>
         <Link to="/">Home</Link>
       </div>
     )

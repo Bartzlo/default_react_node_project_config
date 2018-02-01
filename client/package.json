@@ -1,18 +1,24 @@
 {
-  "name": "deathwish",
+  "name": "default_project_client",
   "version": "1.0.0",
-  "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Bartzlo",
   "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "browser-sync": "^2.18.13",
+    "dotenv": "^5.0.0",
     "eslint": "^4.9.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.8.0",
@@ -25,16 +31,9 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-wait": "0.0.2",
-    "node-static": "^0.7.10",
     "path": "^0.12.7",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "rimraf": "^2.6.2",
     "uglifyjs-webpack-plugin": "^1.1.2",
     "webpack-stream": "^4.0.0"
-  },
-  "description": "",
-  "dependencies": {
-    "react-router-dom": "^4.2.2"
   }
 }

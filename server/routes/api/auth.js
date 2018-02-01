@@ -1,11 +1,15 @@
 const express = require('express')
 const router = express.Router()
+const passport = require('passport')
 
-const auth_controllers = require('../../controllers/authControllers')
+const authControllers = require('../../controllers/authControllers')
 
-router.post('/signup', auth_controllers.signup)
-router.post('/signin', auth_controllers.signin)
-router.post('/signout', auth_controllers.signout)
-router.get('/check', auth_controllers.checkUser)
+router.post('/signup', authControllers.signup)
+router.post('/signin', authControllers.signin)
+router.post('/signout', authControllers.signout)
+router.get('/check', authControllers.checkUser)
+
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+router.get('/google/callback', authControllers.googleCallback)
 
 module.exports = router

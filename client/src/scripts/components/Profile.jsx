@@ -1,5 +1,5 @@
-import privateElemReq from '../lib/privateElemReq'
-import privateElemHandleError from '../lib/privateElemHandleError'
+import elemReqData from '../lib/elemReqData'
+import elemHandleError from '../lib/elemHandleError'
 
 class Profile extends React.Component {
   constructor (props) {
@@ -11,7 +11,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount () {
-    privateElemReq('/api/site/profile')
+    elemReqData('/api/site/profile')
       .then(res => this.setState({response: res}))
       .catch(err => this.setState({error: err}))
   }
@@ -21,7 +21,7 @@ class Profile extends React.Component {
     let error = this.state.error
 
     let elem = !response && !error ? null
-      : privateElemHandleError(response, error) || (
+      : elemHandleError(response, error) || (
         <div>
           <h2>Profile page</h2>
           <p>Welcome, {response.arg.userName}</p>
