@@ -15,10 +15,8 @@ module.exports.init = function () {
     function (accessToken, refreshToken, profile, done) {
       User.findOne({'google.id': profile.id}).exec()
         .then(user => {
-          if (user) {
-            done(null, user)
-            return null
-          }
+          if (user) return user
+          console.log('new user');
           user = new User()
           user.google.id = profile.id
           user.google.token = accessToken
@@ -29,7 +27,7 @@ module.exports.init = function () {
         .then(user => {
           user && done(null, user)
         })
-        .catch(err => done(err))
+        .catch(err => done(new Error(err.message)))
     }
     )
   )
