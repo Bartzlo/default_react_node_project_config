@@ -7,11 +7,15 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    bundle: ['./src/scripts/main.jsx']
+    bundle: './src/scripts/main.jsx',
+    'staticPage': './src/view/staticPage/staticPage.js',
+    'module1': './src/view/module1/module1.js',
+    'loadScripts': './src/view/loadScripts.js'
   },
 
   output: {
-    filename: '[name].js'
+    filename: '[name].js',
+    library: '[name]'
   },
 
   resolve: {
@@ -33,5 +37,5 @@ module.exports = {
   ],
 
   // devtool: process.env.DEV ? 'source-map' : '', // for IE and EDGE debug
-  devtool: process.env.DEV ? 'eval-source-map' : ''
+  // devtool: process.env.DEV ? 'eval-source-map' : ''
 }
