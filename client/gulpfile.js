@@ -14,7 +14,7 @@ const rigger = require('gulp-rigger')
 
 const webpackConfig = require('./webpack.config')
 
-gulp.task('serve', ['build-style', 'build-html', 'build-js', 'build-img', 'build-fonts'], function () {
+gulp.task('serve', ['build-style', 'build-html', 'build-js', 'build-fonts'], function () {
   // browserSync.init({
   //   server: {baseDir: 'build/'},
   //   open: false,
@@ -25,7 +25,7 @@ gulp.task('serve', ['build-style', 'build-html', 'build-js', 'build-img', 'build
   gulp.watch('src/**/*.scss', ['build-style'])
   gulp.watch('src/**/*.js', ['build-js'])
   gulp.watch('src/**/*.jsx', ['build-js'])
-  gulp.watch('src/img/**/*.*', ['build-img'])
+  // gulp.watch('src/img/**/*.*', ['build-img'])
   gulp.watch('src/fonts/**/*.*', ['build-fonts'])
   gulp.watch('src/data/**/*.*', ['copy-data'])
   // gulp.watch('src/**/*.*').on('change', browserSync.reload); // reload from any changes
