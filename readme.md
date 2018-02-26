@@ -19,3 +19,8 @@ GOOGLE_ID=123qwe123qwe.apps.googleusercontent.com (for example)\
 GOOGLE_SECRET=qqwEQwe12qweq2 (for example)\
 OAUTH_CALLBACK_URL=http://127.0.0.1:3000/api/auth/google/callback (for example, if PORT == 3000)\
 SESSION_SECRET=qweqwe (for example)
+
+## Starting
+- start your mongo server
+- npm run start (in server dir, or *npm run dev* for development)
+- webpack (in client dir)
