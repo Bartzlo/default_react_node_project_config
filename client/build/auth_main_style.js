@@ -1,4 +1,4 @@
-var blog_main =
+var auth_main_style =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -61,12 +61,12 @@ var blog_main =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 35:
+/***/ 40:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -74,4 +74,4 @@ var blog_main =
 /***/ })
 
 /******/ });
-//# sourceMappingURL=blog_main.js.map
+//# sourceMappingURL=auth_main_style.js.map

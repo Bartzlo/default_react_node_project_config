@@ -5,7 +5,7 @@ doctype html
 html
   head
     title= title
-    link(rel="stylesheet", href="blog_main.css")
+    link(rel="stylesheet", href="blog_main_style.css")
   body(class='staticPage', id= id, data-script-src='/staticPage.js')
     - text = 'red'
     include ../module1/module1.pug
@@ -13,4 +13,4 @@ html
     - text = 'green'
     include ../module1/module1.pug
 
-    script(src='commons.js')
+    script(src='blog_commons.js')

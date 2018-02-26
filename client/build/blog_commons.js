@@ -1,4 +1,4 @@
-var commons =
+var blog_commons =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
 /******/ 	var parentJsonpFunction = window["webpackJsonp_name_"];
@@ -35,7 +35,7 @@ var commons =
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		3: 0
+/******/ 		4: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -148,7 +148,7 @@ var commons =
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 37);
+/******/ 	return __webpack_require__(__webpack_require__.s = 39);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -266,7 +266,7 @@ exports.default = wait;
 
 /***/ }),
 
-/***/ 37:
+/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
@@ -277,4 +277,4 @@ module.exports = __webpack_require__(23);
 /***/ })
 
 /******/ });
-//# sourceMappingURL=commons.js.map
+//# sourceMappingURL=blog_commons.js.map

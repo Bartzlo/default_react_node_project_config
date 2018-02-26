@@ -14,17 +14,23 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    blog_main: './src/view/blog/blog_main.scss',
-    auth_main: './src/view/auth/auth_main.scss',
-    commons: [
+    // Blog section
+    blog_main_style: './src/view/blog/blog_main.scss',
+    staticPage: './src/view/blog/staticPage/staticPage.js',
+    module1: './src/view/blog/module1/module1.js',
+    blog_commons: [
       // 'jquery', //example
       './src/lib/createElems.js',
       './src/lib/loadScripts.js',
       './src/lib/waitScript.js'
     ],
-    staticPage: './src/view/blog/staticPage/staticPage.js',
-    module1: './src/view/blog/module1/module1.js',
-    auth: './src/view/auth/main.jsx'
+
+    auth_main_style: './src/view/auth/auth_main.scss',
+    auth_main: './src/view/auth/main.jsx',
+    auth_commons: [
+      process.env.DEV ? 'react/umd/react.development.js' : 'react/umd/react.production.min.js',
+      process.env.DEV ? 'react-dom/umd/react-dom.development.js' : 'react-dom/umd/react-dom.production.min.js'
+    ]
   },
 
   output: {
@@ -99,8 +105,13 @@ module.exports = {
       // $: 'jquery'  //example
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'commons',
+      name: 'blog_commons',
       chunks: ['staticPage', 'module1'],
+      minChunks: Infinity
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'auth_commons',
+      chunks: ['auth_main'],
       minChunks: Infinity
     })
   ],

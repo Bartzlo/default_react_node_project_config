@@ -1,7 +1,7 @@
 var staticPage =
-webpackJsonp_name_([0],{
+webpackJsonp_name_([1],{
 
-/***/ 38:
+/***/ 37:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57,5 +57,5 @@ exports.elems = elems;
 
 /***/ })
 
-},[38]);
+},[37]);
 //# sourceMappingURL=staticPage.js.map
