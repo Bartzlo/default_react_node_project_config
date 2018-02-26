@@ -1,7 +1,8 @@
 module.exports = {
     "globals": {
         "ReactDOM": false,
-        "React": false
+        "React": false,
+        "DEV": false
     },
     "extends": "standard",
     "rules": {

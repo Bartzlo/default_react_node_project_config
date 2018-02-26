@@ -79,7 +79,7 @@ class Signup extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        if (DEV) console.log(res)
         if (res.type === 'ok') {
           fetch('/api/auth/signin', {
             method: 'post',

@@ -24,7 +24,7 @@ class App extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        if (DEV) console.log(res)
         this.changeUser(res.arg.username)
       })
       .catch(err => console.log(err))

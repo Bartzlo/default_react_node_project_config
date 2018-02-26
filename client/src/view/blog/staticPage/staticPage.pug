@@ -1,0 +1,16 @@
+- id = (Math.random()*1000000000 + '').substr(0, 7)
+- let text
+
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="blog_main_style.css")
+  body(class='staticPage', id= id, data-script-src='/staticPage.js')
+    - text = 'red'
+    include ../module1/module1.pug
+    p Hello, this is test.
+    - text = 'green'
+    include ../module1/module1.pug
+
+    script(src='blog_commons.js')

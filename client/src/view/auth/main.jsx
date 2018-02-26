@@ -2,8 +2,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from './components/App'
 
-console.log('Start main script')
-console.log('-----------------')
+if (DEV) console.log('Start main script')
+if (DEV) console.log('-----------------')
 
 ReactDOM.render(
   <BrowserRouter>

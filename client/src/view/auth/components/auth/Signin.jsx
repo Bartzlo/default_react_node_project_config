@@ -56,7 +56,7 @@ class Signin extends React.Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        if (DEV) console.log(res)
         if (res.type === 'ok') this.props.channgeUser(res.arg.username)
         if (res.type === 'error') this.handleError(res.message)
       })

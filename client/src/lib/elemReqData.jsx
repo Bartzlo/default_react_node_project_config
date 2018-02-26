@@ -10,11 +10,11 @@ function req (url, query = '') {
     fetch(url, opt)
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        if (DEV) console.log(res)
         resolve(res)
       })
       .catch(err => {
-        console.log(err)
+        if (DEV) console.log(err)
         reject(err)
       })
   })

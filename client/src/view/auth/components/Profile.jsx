@@ -1,5 +1,5 @@
-import elemReqData from '../lib/elemReqData'
-import elemHandleError from '../lib/elemHandleError'
+import elemReqData from 'lib/elemReqData'
+import elemHandleError from 'lib/elemHandleError'
 
 class Profile extends React.Component {
   constructor (props) {

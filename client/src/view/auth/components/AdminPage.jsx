@@ -1,5 +1,5 @@
-import elemReqData from '../lib/elemReqData'
-import elemHandleError from '../lib/elemHandleError'
+import elemReqData from 'lib/elemReqData'
+import elemHandleError from 'lib/elemHandleError'
 
 class AdminPage extends React.Component {
   constructor (props) {
