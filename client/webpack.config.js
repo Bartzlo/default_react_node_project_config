@@ -29,7 +29,8 @@ module.exports = {
     auth_main: './src/view/auth/main.jsx',
     auth_commons: [
       process.env.DEV ? 'react/umd/react.development.js' : 'react/umd/react.production.min.js',
-      process.env.DEV ? 'react-dom/umd/react-dom.development.js' : 'react-dom/umd/react-dom.production.min.js'
+      process.env.DEV ? 'react-dom/umd/react-dom.development.js' : 'react-dom/umd/react-dom.production.min.js',
+      'react-router-dom'
     ]
   },
 
