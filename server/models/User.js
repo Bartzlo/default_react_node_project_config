@@ -1,45 +1,43 @@
-const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-const userSchema = new mongoose.Schema({
-  group: {
-    type: String,
-    default: 'user'
-  },
-  local: {
-    username: {
-      type: String,
-      unique: true
+module.exports = function (sequelize, DataTypes) {
+  const User = sequelize.define('User', {
+    access_group: {
+      type: DataTypes.STRING,
+      defaultValue: 'user'
     },
     email: {
-      type: String,
+      type: DataTypes.STRING,
+      isEmail: true,
       unique: true
     },
-    password: String
-  },
-  google: {
-    id: String,
-    token: String,
-    email: String,
-    name: String
-  }
-})
+    local_name: {
+      type: DataTypes.STRING,
+      unique: true
+    },
+    password: DataTypes.STRING,
+    google_name: DataTypes.STRING,
+    google_id: DataTypes.STRING,
+    google_token: DataTypes.STRING
+  })
 
-/**
- * Hashing password for loclcal user accounts
- */
+  User.beforeSave((user, options) => {
+    if (user.password) {
+      return bcrypt.hash(user.password, 10)
+        .then(res => {
+          user.password = res
+        })
+        .catch(err => console.log(err))
+    }
+  })
 
-userSchema.pre('save', function (next) {
-  if (this.local.password) {
-    bcrypt.hash(this.local.password, 10)
-      .then(res => {
-        this.local.password = res
-        next()
-      })
-      .catch(err => next(err))
-  } else {
-    next()
-  }
-})
+  /**
+   * Associate example
+  */
 
-module.exports = mongoose.model('users', userSchema)
+  // User.associate = (models) => {
+  //   User.belongsTo(models.Article)
+  // }
+
+  return User
+}

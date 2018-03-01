@@ -1,5 +1,12 @@
-const mongoose = require('mongoose')
-const sessionSchema = new mongoose.Schema({
-  _id: {type: String}
-})
-module.exports = mongoose.model('session', sessionSchema)
+module.exports = function (sequelize, DataTypes) {
+  const Session = sequelize.define('Session', {
+    sid: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    expires: DataTypes.DATE,
+    data: DataTypes.TEXT
+  })
+
+  return Session
+}

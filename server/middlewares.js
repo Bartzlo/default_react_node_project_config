@@ -13,7 +13,7 @@ exports.isAuth = function (groups = []) {
 
       let isChecked = true
       if (groups.length > 0) {
-        isChecked = !!groups.find(val => val === req.user.group)
+        isChecked = !!groups.find(val => val === req.user.access_group)
       }
 
       if (!isChecked) {
@@ -21,8 +21,8 @@ exports.isAuth = function (groups = []) {
           type: 'error',
           message: 'not enough rights',
           arg: {
-            userName: req.user.username,
-            userGroup: req.user.group,
+            userName: req.user.local_name || req.user.google_name,
+            userGroup: req.user.access_group,
             groupList: groups
           },
           status: 401

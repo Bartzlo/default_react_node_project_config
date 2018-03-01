@@ -9,29 +9,35 @@ const logger = require('morgan')
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
 const nocache = require('nocache')
 const favicon = require('serve-favicon')
-const mongoose = require('mongoose')
-const MongoStore = require('connect-mongo')(session)
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
+const db = require('./models')
 const passport = require('passport')
 
-/**
- * Init passport strategis
- */
-
+// Init passport strategis
 require('./initPassport').init()
 
 /**
- * Mongoose connection
- */
+ * Init db
+*/
 
-mongoose.connect(process.env.DB_PATH, {
-  user: process.env.DB_USER,
-  pass: process.env.DB_PASS
-})
+db.sequelize
+  .authenticate()
   .then(() => {
-    console.log('Mongoose has been connected to base')
+    let syncs = []
+
+    for (const key in db) {
+      if (db.hasOwnProperty(key) && key !== 'sequelize' && key !== 'Sequelize') {
+        syncs.push(db[key].sync())
+      }
+    }
+
+    return Promise.all([db.User.sync(), db.Session.sync({force: true})])
   })
-  .catch((err) => {
-    console.log('Connection error: ' + err)
+  .then(() => {
+    console.log('DB connection has been established successfully.')
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err)
   })
 
 /**
@@ -55,8 +61,8 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   saveUninitialized: false,
   resave: false,
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection
+  store: new SequelizeStore({
+    db: db.sequelize
   }),
   cookie: {
     maxAge: 3600000
@@ -90,7 +96,7 @@ app.use(function (req, res, next) {
   next(err)
 })
 
-// error handler
+// other error handler
 app.use(function (err, req, res, next) {
   console.log(err.details || err.stack)
   res.status(err.status || 500)

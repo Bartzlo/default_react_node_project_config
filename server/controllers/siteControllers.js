@@ -1,6 +1,6 @@
 exports.profile = function (req, res, next) {
-  let name = req.user.local.username || req.user.google.name
-  let email = req.user.local.email || req.user.google.email
+  let name = req.user.local_name || req.user.google_name
+  let email = req.user.email
 
   res.send({
     type: 'ok',
@@ -8,7 +8,7 @@ exports.profile = function (req, res, next) {
     arg: {
       userName: name,
       email: email,
-      userGroup: req.user.group
+      userGroup: req.user.access_group
     }
   })
 }
