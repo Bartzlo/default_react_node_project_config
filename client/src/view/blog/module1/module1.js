@@ -4,17 +4,18 @@ class Module1 {
   constructor (domElem) {
     if (DEV) console.log('Create new Module1')
     this.domElem = domElem
-    this.text = this.domElem.firstElementChild.innerHTML
+    this.colorElem = this.domElem.querySelector('.color')
+    this.text = this.colorElem.innerHTML
     this.setColor()
   }
 
   setColor () {
-    this.domElem.style.color = this.text
+    this.colorElem.style.color = this.text
   }
 
   setText (text) {
     this.text = text
-    this.domElem.innerHTML = text
+    this.colorElem.innerHTML = text
     this.setColor()
   }
 }

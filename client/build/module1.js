@@ -1,5 +1,5 @@
 var module1 =
-webpackJsonp_name_([2],{
+webpackJsonp_name_([5],{
 
 /***/ 38:
 /***/ (function(module, exports, __webpack_require__) {
@@ -14,7 +14,7 @@ exports.elems = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _createElems = __webpack_require__(12);
+var _createElems = __webpack_require__(7);
 
 var _createElems2 = _interopRequireDefault(_createElems);
 
@@ -28,20 +28,21 @@ var Module1 = function () {
 
     if (true) console.log('Create new Module1');
     this.domElem = domElem;
-    this.text = this.domElem.firstElementChild.innerHTML;
+    this.colorElem = this.domElem.querySelector('.color');
+    this.text = this.colorElem.innerHTML;
     this.setColor();
   }
 
   _createClass(Module1, [{
     key: 'setColor',
     value: function setColor() {
-      this.domElem.style.color = this.text;
+      this.colorElem.style.color = this.text;
     }
   }, {
     key: 'setText',
     value: function setText(text) {
       this.text = text;
-      this.domElem.innerHTML = text;
+      this.colorElem.innerHTML = text;
       this.setColor();
     }
   }]);

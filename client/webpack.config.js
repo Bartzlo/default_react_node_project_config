@@ -18,6 +18,9 @@ module.exports = {
     blog_main_style: './src/view/blog/blog_main.scss',
     staticPage: './src/view/blog/staticPage/staticPage.js',
     module1: './src/view/blog/module1/module1.js',
+    module2: './src/view/blog/module2/module2.js',
+    module3: './src/view/blog/module3/module3.js',
+    module4: './src/view/blog/module4/module4.js',
     blog_commons: [
       // 'jquery', //example
       './src/lib/createElems.js',
@@ -107,7 +110,13 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'blog_commons',
-      chunks: ['staticPage', 'module1'],
+      chunks: [
+        'staticPage',
+        'module1',
+        'module2',
+        'module3',
+        'module4'
+      ],
       minChunks: Infinity
     }),
     new webpack.optimize.CommonsChunkPlugin({

@@ -1,16 +1,56 @@
-- id = (Math.random()*1000000000 + '').substr(0, 7)
-- let text
+//- required data:
+//- {
+//-   text: 'any text',
+//-   title: 'custom title',
+//-   leftWidgetPanel: {
+//-     title: 'Left widget panel',
+//-     modules: ['module1', 'module2']
+//-   },
+//-   rightWidgetPanel: {
+//-     title: 'Right widget panel',
+//-     modules: ['module3', 'module4']
+//-   }
+//- }
+
+//- init vars for module constructor (widget_panel)
+-
+  let widget_panel_title
+  let widget_panel_modules
+
+//- emulating data from server
+
+-
+  let text
+
+  let leftWidgetPanel = {
+    title: 'Left widget panel',
+    modules: ['module4', 'module3']
+  }
+
+  let rightWidgetPanel = {
+    title: 'Right widget panel',
+    modules: ['module1', 'module2']
+  }
 
 doctype html
 html
   head
     title= title
     link(rel="stylesheet", href="blog_main_style.css")
-  body(class='staticPage', id= id, data-script-src='/staticPage.js')
+  body(class='staticPage', data-script-src='/staticPage.js')
     - text = 'red'
     include ../module1/module1.pug
     p Hello, this is test.
     - text = 'green'
     include ../module1/module1.pug
+    include ../module2/module2.pug
+
+    - widget_panel_title = leftWidgetPanel.title
+    - widget_panel_modules = leftWidgetPanel.modules
+    include ../widget_panel/widget_panel.pug
+
+    - widget_panel_title = rightWidgetPanel.title
+    - widget_panel_modules = rightWidgetPanel.modules
+    include ../widget_panel/widget_panel.pug
 
     script(src='blog_commons.js')

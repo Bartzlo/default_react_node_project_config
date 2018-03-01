@@ -1,0 +1,9 @@
+//- {
+//-   widget_panel_title: 'Custom title',
+//-   widget_panel_modules: ['module1', 'module2']
+//- }
+
+div(class='widget_panel')
+  h4 #{widget_panel_title}
+  div.widget_panel__container
+    include ../../dynamicModules.pug

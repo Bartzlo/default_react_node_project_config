@@ -35,7 +35,7 @@ var blog_commons =
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		4: 0
+/******/ 		7: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -99,53 +99,10 @@ var blog_commons =
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 42);
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ 12:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _loadScripts = __webpack_require__(22);
-
-var _loadScripts2 = _interopRequireDefault(_loadScripts);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-if (true) console.log('Execute createElems.js');
-
-function getThisScriptSrc() {
-  if (document.currentScript) {
-    return document.currentScript.dataset.src;
-  } else {
-    var scripts = document.getElementsByTagName('script');
-    return scripts[scripts.length - 1].dataset.src;
-  }
-}
-
-function createObjs(ClassElem) {
-  var thisSrc = getThisScriptSrc();
-  var elems = [];
-  _loadScripts2.default.forEach(function (element) {
-    // eslint-disable-line
-    if (element.dataset.scriptSrc === thisSrc) {
-      elems.push(new ClassElem(element));
-    }
-  });
-  return elems;
-}
-
-exports.default = createObjs;
-
-/***/ }),
 
 /***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
@@ -217,13 +174,56 @@ exports.default = wait;
 
 /***/ }),
 
-/***/ 39:
+/***/ 42:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(12);
+__webpack_require__(7);
 __webpack_require__(22);
 module.exports = __webpack_require__(23);
 
+
+/***/ }),
+
+/***/ 7:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _loadScripts = __webpack_require__(22);
+
+var _loadScripts2 = _interopRequireDefault(_loadScripts);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+if (true) console.log('Execute createElems.js');
+
+function getThisScriptSrc() {
+  if (document.currentScript) {
+    return document.currentScript.dataset.src;
+  } else {
+    var scripts = document.getElementsByTagName('script');
+    return scripts[scripts.length - 1].dataset.src;
+  }
+}
+
+function createObjs(ClassElem) {
+  var thisSrc = getThisScriptSrc();
+  var elems = [];
+  _loadScripts2.default.forEach(function (element) {
+    // eslint-disable-line
+    if (element.dataset.scriptSrc === thisSrc) {
+      elems.push(new ClassElem(element));
+    }
+  });
+  return elems;
+}
+
+exports.default = createObjs;
 
 /***/ })
 
