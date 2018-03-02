@@ -14,7 +14,7 @@ const db = require('./models')
 const passport = require('passport')
 
 // Init passport strategis
-require('./initPassport').init()
+require('./lib/initPassport').init()
 
 /**
  * Init db

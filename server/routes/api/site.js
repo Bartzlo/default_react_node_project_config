@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const isAuth = require('../../middlewares').isAuth
+const isAuth = require('../../lib/middlewares').isAuth
 const siteControllers = require('../../controllers/siteControllers')
 
 router.get('/profile', isAuth(), siteControllers.profile)

@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const db = require('./models')
+const db = require('../models')
 
 module.exports.init = function () {
   // config GoogleStrategy

@@ -1,4 +1,4 @@
-const ResponseError = require('./lib/ResponseError')
+const ResponseError = require('./ResponseError')
 
 /**
  * Check user group for access to private pages
