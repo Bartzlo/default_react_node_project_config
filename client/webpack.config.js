@@ -19,8 +19,8 @@ module.exports = {
     staticPage: './src/view/blog/staticPage/staticPage.js',
     module1: './src/view/blog/module1/module1.js',
     module2: './src/view/blog/module2/module2.js',
-    module3: './src/view/blog/module3/module3.js',
-    module4: './src/view/blog/module4/module4.js',
+    w_mod1: './src/view/blog/widgets/w_mod1/w_mod1.js',
+    w_mod2: './src/view/blog/widgets/w_mod2/w_mod2.js',
     blog_commons: [
       // 'jquery', //example
       './src/lib/createElems.js',
@@ -114,8 +114,8 @@ module.exports = {
         'staticPage',
         'module1',
         'module2',
-        'module3',
-        'module4'
+        'w_mod1',
+        'w_mod2'
       ],
       minChunks: Infinity
     }),

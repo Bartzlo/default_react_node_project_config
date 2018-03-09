@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom' // eslint-disable-line
 
 const MainMenu = (props) => (
   <nav className="main-menu">

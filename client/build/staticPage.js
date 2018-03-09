@@ -1,5 +1,5 @@
 var staticPage =
-webpackJsonp_name_([1],{
+webpackJsonp_name_([3],{
 
 /***/ 37:
 /***/ (function(module, exports, __webpack_require__) {
@@ -41,16 +41,14 @@ var StaticPage = function () {
     value: function editModule() {
       (0, _waitScript2.default)('module1') // eslint-disable-line
       .then(function (res) {
-        res.elems[1].setText('orange'); // eslint-disable-line
+        if (true) console.log('Change module 1[0] text');
+        res.elems[0].setText('purple'); // eslint-disable-line
       });
     }
   }]);
 
   return StaticPage;
 }();
-
-// console.log($('p'))
-
 
 var elems = (0, _createElems2.default)(StaticPage);
 exports.elems = elems;

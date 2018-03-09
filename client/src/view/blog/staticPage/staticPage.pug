@@ -1,35 +1,37 @@
-//- required data:
-//- {
-//-   text: 'any text',
-//-   title: 'custom title',
-//-   leftWidgetPanel: {
-//-     title: 'Left widget panel',
-//-     modules: ['module1', 'module2']
-//-   },
-//-   rightWidgetPanel: {
-//-     title: 'Right widget panel',
-//-     modules: ['module3', 'module4']
-//-   }
-//- }
+include ../widget_panel/widget_panel.pug
 
-//- init vars for module constructor (widget_panel)
+//- Require data:
 -
-  let widget_panel_title
-  let widget_panel_modules
-
-//- emulating data from server
-
--
-  let text
-
-  let leftWidgetPanel = {
-    title: 'Left widget panel',
-    modules: ['module4', 'module3']
-  }
-
-  let rightWidgetPanel = {
-    title: 'Right widget panel',
-    modules: ['module1', 'module2']
+  let data = {
+    moduleText: 'red',
+    firstWidget: [
+      {
+        view: 'w_mod1',
+        args: {
+          text: 'ad aw adfdfsxd f sd'
+        }
+      },
+      {
+        view: 'w_mod2',
+        args: {
+          text: 'jghj fdfg re4tgewe re df'
+        }
+      }
+    ],
+    secondWidget: [
+      {
+        view: 'w_mod2',
+        args: {
+          text: 'nmbzzx s zssg r gfg cv'
+        }
+      },
+      {
+        view: 'w_mod1',
+        args: {
+          text: 'opiou j ghyu i uioui jklj'
+        }
+      }
+    ]
   }
 
 doctype html
@@ -38,19 +40,13 @@ html
     title= title
     link(rel="stylesheet", href="blog_main_style.css")
   body(class='staticPage', data-script-src='/staticPage.js')
-    - text = 'red'
+    h1 Static page
     include ../module1/module1.pug
-    p Hello, this is test.
-    - text = 'green'
+    p Continue of the static page...
     include ../module1/module1.pug
     include ../module2/module2.pug
 
-    - widget_panel_title = leftWidgetPanel.title
-    - widget_panel_modules = leftWidgetPanel.modules
-    include ../widget_panel/widget_panel.pug
-
-    - widget_panel_title = rightWidgetPanel.title
-    - widget_panel_modules = rightWidgetPanel.modules
-    include ../widget_panel/widget_panel.pug
+    +widget_panel('Firts widget panel', data.firstWidget)
+    +widget_panel('Second widget panel', data.secondWidget)
 
     script(src='blog_commons.js')

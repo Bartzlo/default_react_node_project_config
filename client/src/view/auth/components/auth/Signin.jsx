@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom' // eslint-disable-line
 
 class Signin extends React.Component {
   constructor (props) {

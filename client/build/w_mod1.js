@@ -1,5 +1,5 @@
-var module3 =
-webpackJsonp_name_([3],{
+var w_mod1 =
+webpackJsonp_name_([2],{
 
 /***/ 40:
 /***/ (function(module, exports, __webpack_require__) {
@@ -20,17 +20,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Module3 = function Module3(domElem) {
-  _classCallCheck(this, Module3);
+var WMode1 = function WMode1(domElem) {
+  _classCallCheck(this, WMode1);
 
-  if (true) console.log('Create new Module3');
+  if (true) console.log('Create new WMode1');
   this.domElem = domElem;
 };
 
-var elems = (0, _createElems2.default)(Module3);
+var elems = (0, _createElems2.default)(WMode1);
 exports.elems = elems;
 
 /***/ })
 
 },[40]);
-//# sourceMappingURL=module3.js.map
+//# sourceMappingURL=w_mod1.js.map

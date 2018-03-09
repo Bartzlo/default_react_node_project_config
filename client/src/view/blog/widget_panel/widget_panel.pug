@@ -1,9 +1,9 @@
-//- {
-//-   widget_panel_title: 'Custom title',
-//-   widget_panel_modules: ['module1', 'module2']
-//- }
+include ../widgets/w_mod1/w_mod1.pug
+include ../widgets/w_mod2/w_mod2.pug
 
-div(class='widget_panel')
-  h4 #{widget_panel_title}
-  div.widget_panel__container
-    include ../../dynamicModules.pug
+mixin widget_panel(title, widgets)
+  div(class='widget_panel')
+    h4 #{title}
+    div.widget_panel__container
+      each widget in widgets
+        +#{widget.view}(widget.args)

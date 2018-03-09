@@ -12,11 +12,11 @@ class StaticPage {
   editModule () {
     wait('module1') // eslint-disable-line
       .then(res => {
-        res.elems[1].setText('orange') // eslint-disable-line
+        if (DEV) console.log('Change module 1[0] text')
+        res.elems[0].setText('purple') // eslint-disable-line
       })
   }
 }
 
-// console.log($('p'))
 let elems = createElems(StaticPage)
 export {elems}

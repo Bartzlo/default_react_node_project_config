@@ -1,13 +1,13 @@
-import { Route, Switch, Redirect } from 'react-router-dom'
-import MainMenu from './MainMenu'
-import UserMenu from './auth/UserMenu'
-import HomePage from './HomePage'
-import AdminPage from './AdminPage'
-import PublicPage from './PublicPage'
-import Profile from './Profile'
-import Signin from './auth/Signin'
-import Signup from './auth/Signup'
-import Page404 from './Page404'
+import { Route, Switch, Redirect } from 'react-router-dom' // eslint-disable-line
+import MainMenu from './MainMenu' // eslint-disable-line
+import UserMenu from './auth/UserMenu' // eslint-disable-line
+import HomePage from './HomePage' // eslint-disable-line
+import AdminPage from './AdminPage' // eslint-disable-line
+import PublicPage from './PublicPage' // eslint-disable-line
+import Profile from './Profile' // eslint-disable-line
+import Signin from './auth/Signin' // eslint-disable-line
+import Signup from './auth/Signup' // eslint-disable-line
+import Page404 from './Page404' // eslint-disable-line
 
 class App extends React.Component {
   constructor (props) {

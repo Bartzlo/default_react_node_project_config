@@ -1,11 +1,11 @@
 import createElems from 'lib/createElems'
 
-class Module4 {
+class WMode2 {
   constructor (domElem) {
-    if (DEV) console.log('Create new Module4')
+    if (DEV) console.log('Create new WMode2')
     this.domElem = domElem
   }
 }
 
-let elems = createElems(Module4)
+let elems = createElems(WMode2)
 export {elems}

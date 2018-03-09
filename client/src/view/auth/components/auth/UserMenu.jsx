@@ -1,7 +1,5 @@
-import { Link } from 'react-router-dom'
-import Signout from './Signout'
-// import User from '../../store/User'
-// import state from '../../store/state'
+import { Link } from 'react-router-dom' // eslint-disable-line
+import Signout from './Signout' // eslint-disable-line
 
 class UserMenu extends React.Component {
   render () {
