@@ -1,7 +1,0 @@
-include ../innerModule/innerModule.pug
-
-mixin expModule(data)
-  div.exp-module
-    div.component-data #{JSON.stringify(data.firstWidget)}
-    h2.exp-module__title Exp module title
-    +innerModule(data.secondWidget)

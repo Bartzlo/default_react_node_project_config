@@ -1,0 +1,7 @@
+include ../../../lib/components/component.pug
+
+div
+  h2 EXT module
+  p #{data.text}
+  +component('inner-module', data)
+  p end of EXT module

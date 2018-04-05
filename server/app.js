@@ -70,7 +70,7 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(favicon(path.join(__dirname, '../client/build', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, '../client/build/img', 'favicon.ico')))
 app.use(express.static(path.join(__dirname, '../client/build')))
 
 /**
@@ -78,11 +78,11 @@ app.use(express.static(path.join(__dirname, '../client/build')))
  */
 
 app.use('/test', function (req, res, next) {
-  res.render(path.join(__dirname, '../client/src/view/blog/staticPage/staticPage.pug'), { title: 'My test' })
+  res.render(path.join(__dirname, '../client/src/static/blog/pages/staticPage/staticPage.pug'), { title: 'My test' })
 })
 app.use('/api', require('./routes/api'))
 app.use('/*', function (req, res) {
-  res.render(path.join(__dirname, '../client/src/view/auth/index.pug'))
+  res.render(path.join(__dirname, '../client/src/react/auth/auth.pug'))
 })
 
 /**

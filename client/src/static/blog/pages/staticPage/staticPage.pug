@@ -1,0 +1,15 @@
+include ../../../lib/components/component.pug
+
+//- Require data:
+
+//-
+
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="staticPage.css")
+  body(class='staticPage', data-script-src='/staticPage.js')
+    h1 Static page
+    +component('exp-module', {text: 'EXP text', innerText: 'INNER text'})
+    script(src='staticPage.js')
