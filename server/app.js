@@ -78,7 +78,7 @@ app.use(express.static(path.join(__dirname, '../client/build')))
  */
 
 app.use('/test', function (req, res, next) {
-  res.render(path.join(__dirname, '../client/src/static/blog/pages/staticPage/staticPage.pug'), { title: 'My test' })
+  res.render(path.join(__dirname, '../client/src/static/blog/pages/ExamplePage/ExamplePage.pug'), { title: 'My test' })
 })
 app.use('/api', require('./routes/api'))
 app.use('/*', function (req, res) {

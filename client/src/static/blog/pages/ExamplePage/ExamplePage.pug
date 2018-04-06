@@ -1,0 +1,34 @@
+include ../../../lib/Component.pug
+include ../../components/ExamplePrerenderModule/ExamplePrerenderModule.pug
+
+//- Require data:
+
+//-
+
+//- Example data:
+-
+  let examplePrerenderModuleData = {
+    text: 'ExamplePrerenderModule text from server',
+    innerModule:
+    {
+      text: 'ExampleInnerPrerenderModule text from server'
+    }
+  }
+
+  let exampleClearModuleData = {
+    text: 'ExampleClearModule text from server',
+    innerModule: {
+      text: 'ExampleClearInnerModule text from server'
+    }
+  }
+
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="ExamplePage.css")
+  body(class='example-page', data-script-src='/ExamplePage.js')
+    h1 ExamplePage
+    +ExamplePrerenderModule(examplePrerenderModuleData)
+    +Component('example-clear-module', exampleClearModuleData)
+    script(src='ExamplePage.js')

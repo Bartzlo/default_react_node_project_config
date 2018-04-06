@@ -1,0 +1,9 @@
+include ../ExampleInnerPrerenderModule/ExampleInnerPrerenderModule.pug
+
+mixin ExamplePrerenderModule(data)
+  div.example-prerender-module
+    div.component-data #{JSON.stringify(data)}
+    h2 ExamplePrerenderModule
+    +ExampleInnerPrerenderModule(data.innerModule)
+    p #{data.text}
+    p end of ExamplePrerenderModule

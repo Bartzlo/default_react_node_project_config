@@ -1,0 +1,7 @@
+include ../../../lib/Component.pug
+
+div
+  h2 ExampleClearModule
+  p #{data.text}
+  +Component('example-clear-inner-module', data.innerModule)
+  p end of ExampleClearModule
