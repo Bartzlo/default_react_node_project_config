@@ -1,0 +1,6 @@
+mixin ExampleInnerModule(data , id)
+  div(class = 'example-inner-module', data-id = id)
+    div.component-data #{JSON.stringify(data)}
+    h2 ExampleInnerModule
+    p #{data.text}
+    p end of ExampleInnerModule

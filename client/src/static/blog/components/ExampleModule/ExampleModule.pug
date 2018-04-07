@@ -1,0 +1,10 @@
+include ../ExampleInnerModule/ExampleInnerModule.pug
+
+mixin ExampleModule(data, id)
+  div(class = "example-module", data-id = id)
+    div.component-data #{JSON.stringify(data)}
+    h2 ExampleModule
+    +ExampleInnerModule(data.innerModule, 1)
+    +ExampleInnerModule(data.innerModule, 2)
+    p #{data.text}
+    p end of ExampleModule

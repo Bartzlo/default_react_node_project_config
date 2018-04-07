@@ -1,5 +1,4 @@
-include ../../../lib/Component.pug
-include ../../components/ExamplePrerenderModule/ExamplePrerenderModule.pug
+include ../../components/ExampleModule/ExampleModule.pug
 
 //- Require data:
 
@@ -7,11 +6,11 @@ include ../../components/ExamplePrerenderModule/ExamplePrerenderModule.pug
 
 //- Example data:
 -
-  let examplePrerenderModuleData = {
-    text: 'ExamplePrerenderModule text from server',
+  let ExampleModuleData = {
+    text: 'ExampleModule text from server',
     innerModule:
     {
-      text: 'ExampleInnerPrerenderModule text from server'
+      text: 'ExampleInnerModule text from server'
     }
   }
 
@@ -21,6 +20,7 @@ include ../../components/ExamplePrerenderModule/ExamplePrerenderModule.pug
       text: 'ExampleClearInnerModule text from server'
     }
   }
+//------------------------
 
 doctype html
 html
@@ -29,6 +29,6 @@ html
     link(rel="stylesheet", href="ExamplePage.css")
   body(class='example-page', data-script-src='/ExamplePage.js')
     h1 ExamplePage
-    +ExamplePrerenderModule(examplePrerenderModuleData)
-    +Component('example-clear-module', exampleClearModuleData)
+    +ExampleModule(ExampleModuleData, 1)
+    +ExampleModule(ExampleModuleData, 2)
     script(src='ExamplePage.js')
